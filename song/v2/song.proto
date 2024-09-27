@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package proto.song.v2;
+
+option go_package = "music-server/api/gen/proto/song/v2;songv2";
+
+message Song {
+    string title = 1;
+    string file_url = 2;
+    string genre = 3;
+}
+message Playlist {
+    string name = 1;
+    repeated Song songs = 2;
+}
+
+message ApiRequest {
+  string name = 1;
+}
+  
+message ApiResponse {
+  string mesage = 1;
+}
+
+service ApiService {
+  rpc MakeSomeRequest(ApiRequest) returns (ApiResponse) {}
+}
