@@ -6,22 +6,28 @@ option go_package = "music-server/api/gen/proto/song/v2;songv2";
 
 message Song {
     string title = 1;
-    string file_url = 2;
-    string genre = 3;
+    string artist = 2;
+    string file_url = 3;
+    string genre = 4;
 }
 message Playlist {
     string name = 1;
     repeated Song songs = 2;
 }
 
-message ApiRequest {
-  string name = 1;
+message GetSongRequest {
 }
   
-message ApiResponse {
-  string mesage = 1;
+message GetSongResponse {
+    Song song = 1;
 }
 
-service ApiService {
-  rpc MakeSomeRequest(ApiRequest) returns (ApiResponse) {}
+message GetPlaylistRequest{}
+
+message GetPlaylistResponse{
+    Playlist playlist = 1;
+}
+service SongsService {
+  rpc GetSong(GetSongRequest) returns (GetSongResponse) {}
+  rpc GetPlaylist(GetPlaylistRequest) returns (GetPlaylistResponse) {}
 }
