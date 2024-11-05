@@ -10,24 +10,27 @@ message Song {
     string file_url = 3;
     string genre = 4;
 }
+
 message Playlist {
     string name = 1;
     repeated Song songs = 2;
 }
 
-message GetSongRequest {
+message GetAllSongsRequest {
 }
   
-message GetSongResponse {
-    Song song = 1;
+message GetAllSongsResponse {
+    repeated Playlist playlist = 1;
 }
 
-message GetPlaylistRequest{}
-
-message GetPlaylistResponse{
-    Playlist playlist = 1;
+message CheckInstalledSongsRequest {
+    repeated Song installed_songs = 1; // Liste der auf dem Gerät installierten Songs
 }
+
+message CheckInstalledSongsResponse {
+    repeated Song missing_songs = 1; // Liste der fehlenden Songs
+}
+
 service SongsService {
-  rpc GetSong(GetSongRequest) returns (GetSongResponse) {}
-  rpc GetPlaylist(GetPlaylistRequest) returns (GetPlaylistResponse) {}
+    rpc CheckInstalledSongs(CheckInstalledSongsRequest) returns (CheckInstalledSongsResponse) {}
 }
