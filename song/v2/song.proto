@@ -24,11 +24,12 @@ message GetAllSongsResponse {
 }
 
 message CheckInstalledSongsRequest {
-    repeated Song installed_songs = 1; // Liste der auf dem Gerät installierten Songs
+    string name = 1;
+    repeated Playlist installed_songs = 2; // Liste der auf dem Gerät installierten Songs
 }
 
 message CheckInstalledSongsResponse {
-    repeated Song missing_songs = 1; // Liste der fehlenden Songs
+    repeated Playlist missing_songs = 1; // Liste der fehlenden Songs
 }
 
 service SongsService {
